@@ -120,6 +120,7 @@ public class FirstTest {
                     By.id("org.wikipedia:id/view_page_title_text"),
                     "Cannot find article title",
                     15);
+
             String article_title = title_element.getAttribute("text");
             Assert.assertEquals(
                     "We see unexpected title!",
@@ -127,6 +128,26 @@ public class FirstTest {
                     article_title
             );
         }
+
+        @Test
+        public void searchTest()
+        {
+            waitForElementAndClick(
+                    By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                    "Cannot find 'Search Wikipedia' input",
+                    5);
+            WebElement search_field = waitForElementPresent(By.id("org.wikipedia:id/search_src_text"),
+                    "Cannot find search field" ,
+                    5);
+            String search_text = search_field.getAttribute("text");
+            Assert.assertEquals(
+                    "Cannot find placeholder for searchbox",
+                    "Search…",
+                    search_text
+            );
+
+        }
+
 
 
 
