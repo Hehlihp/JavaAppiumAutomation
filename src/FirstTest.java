@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
 import java.nio.file.WatchEvent;
+import java.util.List;
 
 public class FirstTest {
 
@@ -147,6 +148,41 @@ public class FirstTest {
             );
 
         }
+
+        @Test
+        public void searchTextAndClearTest() {
+
+            waitForElementAndClick(By.xpath("//*[contains(@text, 'Search Wikipedia')]") ,
+                    "Cannot find Search field",
+                    5);
+
+
+            waitForElementAndSendKeys(By.id("org.wikipedia:id/search_src_text"),
+                    "Java",
+                    "Cannot find Search",
+                    5);
+
+
+            List<WebElement> search_result = driver.findElements(By.id("org.wikipedia:id/page_list_item_container"));
+
+            System.out.println(search_result.size());
+            int article_amount = search_result.size();
+
+            Assert.assertTrue("Cannot find any articles", article_amount > 0);
+
+
+
+            waitForElementAndClear(By.id("org.wikipedia:id/search_src_text"),
+                    "Cannot find Search",
+                    5);
+
+
+            waitForElementPresent(By.id("org.wikipedia:id/search_empty_image"),
+                    "Search result must be empty",
+                    5);
+
+        }
+
 
 
 
