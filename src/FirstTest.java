@@ -169,6 +169,9 @@ public class FirstTest {
             int article_amount = search_result.size();
 
             Assert.assertTrue("Cannot find any articles", article_amount > 0);
+            for (WebElement current_element: search_result){
+                Assert.assertTrue("Keyword isn't in every search result", current_element.getText().contains("Java") );
+            }
 
 
 
