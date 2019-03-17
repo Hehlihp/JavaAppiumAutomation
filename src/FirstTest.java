@@ -24,7 +24,7 @@ public class FirstTest {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("platformName","Android");
             capabilities.setCapability("deviceName","AndroidTestDevice");
-            capabilities.setCapability("platformVersion","9");
+            //capabilities.setCapability("platformVersion","9");
             capabilities.setCapability("automationName","Appium");
             capabilities.setCapability("appPackage","org.wikipedia");
             capabilities.setCapability("appActivity",".main.MainActivity");
@@ -163,14 +163,16 @@ public class FirstTest {
                     5);
 
 
-            List<WebElement> search_result = driver.findElements(By.id("org.wikipedia:id/page_list_item_container"));
+            List<WebElement> search_result = driver.findElements(By.id("org.wikipedia:id/page_list_item_title"));
 
             System.out.println(search_result.size());
+
             int article_amount = search_result.size();
 
             Assert.assertTrue("Cannot find any articles", article_amount > 0);
             for (WebElement current_element: search_result){
-                Assert.assertTrue("Keyword isn't in every search result", current_element.getText().contains("Java") );
+                System.out.println(current_element.getAttribute("text"));
+               Assert.assertTrue("Keyword isn't in every search result", current_element.getText().contains("Java") );
             }
 
 
